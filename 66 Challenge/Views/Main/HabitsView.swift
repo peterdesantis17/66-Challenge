@@ -1,7 +1,10 @@
+import SwiftUI
+import Supabase
+
 // Move current habit list view logic here
 struct HabitsView: View {
     @EnvironmentObject var authManager: AuthManager
-    @StateObject private var habitStore = HabitStore()
+    @EnvironmentObject var habitStore: HabitStore
     @State private var showingAddHabit = false
     
     var body: some View {
