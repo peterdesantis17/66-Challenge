@@ -1,5 +1,6 @@
 import Foundation
 import Supabase
+import SwiftUI
 
 @MainActor
 class HabitStore: ObservableObject {
@@ -39,7 +40,7 @@ class HabitStore: ObservableObject {
         }
     }
     
-    private func checkForDayChange() async {
+    func checkForDayChange() async {
         let today = Calendar.current.startOfDay(for: Date())
         
         do {

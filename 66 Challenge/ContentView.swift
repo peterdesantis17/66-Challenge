@@ -12,6 +12,7 @@ struct ContentView: View {
     @StateObject private var habitStore = HabitStore()
     @State private var newHabitTitle = ""
     @State private var showingAddHabit = false
+    @Environment(\.scenePhase) private var scenePhase
     
     var body: some View {
         NavigationView {
@@ -75,6 +76,13 @@ struct ContentView: View {
             }
             .task {
                 try? await habitStore.fetchHabits()
+            }
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active {
+                Task {
+                    await habitStore.checkForDayChange()
+                }
             }
         }
     }
