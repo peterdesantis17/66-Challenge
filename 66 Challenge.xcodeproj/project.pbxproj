@@ -24,6 +24,8 @@
 		D02C8F2C2D5663F900ACC1A7 /* HabitRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F262D5663F900ACC1A7 /* HabitRow.swift */; };
 		D02C8F2D2D5663F900ACC1A7 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F282D5663F900ACC1A7 /* AuthView.swift */; };
 		D02C8F2E2D5663F900ACC1A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F292D5663F900ACC1A7 /* ContentView.swift */; };
+		D03473F72D5A792F00C5D7CD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03473F52D5A792F00C5D7CD /* SettingsView.swift */; };
+		D03473F82D5A792F00C5D7CD /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03473F62D5A792F00C5D7CD /* ProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		D02C8F262D5663F900ACC1A7 /* HabitRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitRow.swift; sourceTree = "<group>"; };
 		D02C8F282D5663F900ACC1A7 /* AuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		D02C8F292D5663F900ACC1A7 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D03473F52D5A792F00C5D7CD /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D03473F62D5A792F00C5D7CD /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				D02C8F272D5663F900ACC1A7 /* Components */,
+				D03473F62D5A792F00C5D7CD /* ProgressView.swift */,
+				D03473F52D5A792F00C5D7CD /* SettingsView.swift */,
 				D02C8F282D5663F900ACC1A7 /* AuthView.swift */,
 				D02C8F292D5663F900ACC1A7 /* ContentView.swift */,
 			);
@@ -212,10 +218,12 @@
 				D02C8EF52D556B9600ACC1A7 /* _6_ChallengeApp.swift in Sources */,
 				D02C8F1F2D559A3400ACC1A7 /* HabitStore.swift in Sources */,
 				D02C8F2B2D5663F900ACC1A7 /* AddHabitSheet.swift in Sources */,
+				D03473F72D5A792F00C5D7CD /* SettingsView.swift in Sources */,
 				D02C8F2C2D5663F900ACC1A7 /* HabitRow.swift in Sources */,
 				D02C8F222D559A5400ACC1A7 /* Habit.swift in Sources */,
 				D02C8F2D2D5663F900ACC1A7 /* AuthView.swift in Sources */,
 				D02C8F1B2D5594FD00ACC1A7 /* AuthManager.swift in Sources */,
+				D03473F82D5A792F00C5D7CD /* ProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

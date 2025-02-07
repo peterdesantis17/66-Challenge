@@ -7,40 +7,62 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(habitStore.habits) { habit in
-                    HabitRow(habit: habit) {
-                        try await habitStore.toggleHabit(habit)
-                    }
-                }
-            }
-            .navigationTitle("Habits")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        Task {
-                            await authManager.signOut()
+        TabView {
+            // Habits Tab
+            NavigationView {
+                List {
+                    ForEach(habitStore.habits) { habit in
+                        HabitRow(habit: habit) {
+                            try await habitStore.toggleHabit(habit)
                         }
-                    }) {
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
                     }
                 }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { showingAddHabit = true }) {
-                        Image(systemName: "plus")
+                .navigationTitle("Habits")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            Task {
+                                await authManager.signOut()
+                            }
+                        }) {
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: { showingAddHabit = true }) {
+                            Image(systemName: "plus")
+                        }
+                    }
+                }
+                .sheet(isPresented: $showingAddHabit) {
+                    AddHabitSheet(isPresented: $showingAddHabit) { title in
+                        try await habitStore.addHabit(title: title)
                     }
                 }
             }
-            .sheet(isPresented: $showingAddHabit) {
-                AddHabitSheet(isPresented: $showingAddHabit) { title in
-                    try await habitStore.addHabit(title: title)
-                }
+            .tabItem {
+                Label("Habits", systemImage: "checkmark.circle.fill")
             }
-            .task {
-                try? await habitStore.fetchHabits()
+            
+            // Progress Tab
+            NavigationView {
+                ProgressView()
             }
+            .tabItem {
+                Label("Progress", systemImage: "chart.bar.fill")
+            }
+            
+            // Settings Tab
+            NavigationView {
+                SettingsView()
+            }
+            .tabItem {
+                Label("Settings", systemImage: "gear")
+            }
+        }
+        .task {
+            try? await habitStore.fetchHabits()
         }
         .onChange(of: scenePhase) { _, phase in
             if phase == .active {
