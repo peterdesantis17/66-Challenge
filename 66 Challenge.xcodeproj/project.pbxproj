@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D02C8EF52D556B9600ACC1A7 /* _6_ChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8EF42D556B9600ACC1A7 /* _6_ChallengeApp.swift */; };
-		D02C8EF72D556B9600ACC1A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8EF62D556B9600ACC1A7 /* ContentView.swift */; };
 		D02C8EF92D556B9800ACC1A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D02C8EF82D556B9800ACC1A7 /* Assets.xcassets */; };
 		D02C8EFD2D556B9800ACC1A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D02C8EFC2D556B9800ACC1A7 /* Preview Assets.xcassets */; };
 		D02C8F052D556CF700ACC1A7 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = D02C8F042D556CF700ACC1A7 /* Auth */; };
@@ -18,26 +17,29 @@
 		D02C8F0D2D556CF700ACC1A7 /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = D02C8F0C2D556CF700ACC1A7 /* Storage */; };
 		D02C8F0F2D556CF700ACC1A7 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = D02C8F0E2D556CF700ACC1A7 /* Supabase */; };
 		D02C8F112D556F8800ACC1A7 /* SupabaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F102D556F8800ACC1A7 /* SupabaseClient.swift */; };
-		D02C8F1A2D5594FD00ACC1A7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F182D5594FD00ACC1A7 /* LoginView.swift */; };
 		D02C8F1B2D5594FD00ACC1A7 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F192D5594FD00ACC1A7 /* AuthManager.swift */; };
-		D02C8F1D2D55950600ACC1A7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F1C2D55950600ACC1A7 /* SignUpView.swift */; };
 		D02C8F1F2D559A3400ACC1A7 /* HabitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F1E2D559A3400ACC1A7 /* HabitStore.swift */; };
 		D02C8F222D559A5400ACC1A7 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F202D559A5400ACC1A7 /* Habit.swift */; };
+		D02C8F2B2D5663F900ACC1A7 /* AddHabitSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F252D5663F900ACC1A7 /* AddHabitSheet.swift */; };
+		D02C8F2C2D5663F900ACC1A7 /* HabitRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F262D5663F900ACC1A7 /* HabitRow.swift */; };
+		D02C8F2D2D5663F900ACC1A7 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F282D5663F900ACC1A7 /* AuthView.swift */; };
+		D02C8F2E2D5663F900ACC1A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F292D5663F900ACC1A7 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D02C8EF12D556B9600ACC1A7 /* 66 Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "66 Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02C8EF42D556B9600ACC1A7 /* _6_ChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _6_ChallengeApp.swift; sourceTree = "<group>"; };
-		D02C8EF62D556B9600ACC1A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D02C8EF82D556B9800ACC1A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D02C8EFA2D556B9800ACC1A7 /* _6_Challenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = _6_Challenge.entitlements; sourceTree = "<group>"; };
 		D02C8EFC2D556B9800ACC1A7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D02C8F102D556F8800ACC1A7 /* SupabaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupabaseClient.swift; sourceTree = "<group>"; };
-		D02C8F182D5594FD00ACC1A7 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D02C8F192D5594FD00ACC1A7 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		D02C8F1C2D55950600ACC1A7 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		D02C8F1E2D559A3400ACC1A7 /* HabitStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitStore.swift; sourceTree = "<group>"; };
 		D02C8F202D559A5400ACC1A7 /* Habit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		D02C8F252D5663F900ACC1A7 /* AddHabitSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddHabitSheet.swift; sourceTree = "<group>"; };
+		D02C8F262D5663F900ACC1A7 /* HabitRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitRow.swift; sourceTree = "<group>"; };
+		D02C8F282D5663F900ACC1A7 /* AuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		D02C8F292D5663F900ACC1A7 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,14 +78,12 @@
 		D02C8EF32D556B9600ACC1A7 /* 66 Challenge */ = {
 			isa = PBXGroup;
 			children = (
+				D02C8F2A2D5663F900ACC1A7 /* Views */,
 				D02C8F212D559A5400ACC1A7 /* Models */,
 				D02C8F1E2D559A3400ACC1A7 /* HabitStore.swift */,
-				D02C8F1C2D55950600ACC1A7 /* SignUpView.swift */,
 				D02C8F192D5594FD00ACC1A7 /* AuthManager.swift */,
-				D02C8F182D5594FD00ACC1A7 /* LoginView.swift */,
 				D02C8F102D556F8800ACC1A7 /* SupabaseClient.swift */,
 				D02C8EF42D556B9600ACC1A7 /* _6_ChallengeApp.swift */,
-				D02C8EF62D556B9600ACC1A7 /* ContentView.swift */,
 				D02C8EF82D556B9800ACC1A7 /* Assets.xcassets */,
 				D02C8EFA2D556B9800ACC1A7 /* _6_Challenge.entitlements */,
 				D02C8EFB2D556B9800ACC1A7 /* Preview Content */,
@@ -105,6 +105,25 @@
 				D02C8F202D559A5400ACC1A7 /* Habit.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D02C8F272D5663F900ACC1A7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D02C8F252D5663F900ACC1A7 /* AddHabitSheet.swift */,
+				D02C8F262D5663F900ACC1A7 /* HabitRow.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		D02C8F2A2D5663F900ACC1A7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D02C8F272D5663F900ACC1A7 /* Components */,
+				D02C8F282D5663F900ACC1A7 /* AuthView.swift */,
+				D02C8F292D5663F900ACC1A7 /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,13 +207,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D02C8EF72D556B9600ACC1A7 /* ContentView.swift in Sources */,
 				D02C8F112D556F8800ACC1A7 /* SupabaseClient.swift in Sources */,
-				D02C8F1A2D5594FD00ACC1A7 /* LoginView.swift in Sources */,
+				D02C8F2E2D5663F900ACC1A7 /* ContentView.swift in Sources */,
 				D02C8EF52D556B9600ACC1A7 /* _6_ChallengeApp.swift in Sources */,
-				D02C8F1D2D55950600ACC1A7 /* SignUpView.swift in Sources */,
 				D02C8F1F2D559A3400ACC1A7 /* HabitStore.swift in Sources */,
+				D02C8F2B2D5663F900ACC1A7 /* AddHabitSheet.swift in Sources */,
+				D02C8F2C2D5663F900ACC1A7 /* HabitRow.swift in Sources */,
 				D02C8F222D559A5400ACC1A7 /* Habit.swift in Sources */,
+				D02C8F2D2D5663F900ACC1A7 /* AuthView.swift in Sources */,
 				D02C8F1B2D5594FD00ACC1A7 /* AuthManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

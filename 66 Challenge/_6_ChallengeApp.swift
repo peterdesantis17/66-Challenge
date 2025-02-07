@@ -14,13 +14,14 @@ struct _6_ChallengeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if authManager.isAuthenticated {
-                ContentView()
-                    .environmentObject(authManager)
-            } else {
-                LoginView()
-                    .environmentObject(authManager)
+            Group {
+                if authManager.isAuthenticated {
+                    ContentView()
+                } else {
+                    AuthView()
+                }
             }
+            .environmentObject(authManager)
         }
     }
 }
