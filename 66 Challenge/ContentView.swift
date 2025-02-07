@@ -7,41 +7,47 @@
 
 import SwiftUI
 
-struct Habit: Identifiable {
-    let id = UUID()
-    let title: String
-    var isCompleted: Bool
-}
-
 struct ContentView: View {
-    @State private var habits: [Habit] = []
+    @EnvironmentObject var authManager: AuthManager
+    @StateObject private var habitStore = HabitStore()
     @State private var newHabitTitle = ""
     @State private var showingAddHabit = false
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(habits) { habit in
+                ForEach(habitStore.habits) { habit in
                     HStack {
                         Text(habit.title)
                         Spacer()
                         Image(systemName: habit.isCompleted ? "checkmark.circle.fill" : "circle")
                             .foregroundColor(habit.isCompleted ? .green : .gray)
                             .onTapGesture {
-                                if let index = habits.firstIndex(where: { $0.id == habit.id }) {
-                                    habits[index].isCompleted.toggle()
+                                Task {
+                                    try? await habitStore.toggleHabit(habit)
                                 }
                             }
                     }
                 }
-                .onDelete(perform: deleteHabits)
             }
             .navigationTitle("Habits")
             .toolbar {
-                Button(action: {
-                    showingAddHabit = true
-                }) {
-                    Image(systemName: "plus")
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        Task {
+                            await authManager.signOut()
+                        }
+                    }) {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        showingAddHabit = true
+                    }) {
+                        Image(systemName: "plus")
+                    }
                 }
             }
             .sheet(isPresented: $showingAddHabit) {
@@ -57,19 +63,20 @@ struct ContentView: View {
                         },
                         trailing: Button("Add") {
                             if !newHabitTitle.isEmpty {
-                                habits.append(Habit(title: newHabitTitle, isCompleted: false))
-                                newHabitTitle = ""
-                                showingAddHabit = false
+                                Task {
+                                    try? await habitStore.addHabit(title: newHabitTitle)
+                                    newHabitTitle = ""
+                                    showingAddHabit = false
+                                }
                             }
                         }
                     )
                 }
             }
+            .task {
+                try? await habitStore.fetchHabits()
+            }
         }
-    }
-    
-    func deleteHabits(at offsets: IndexSet) {
-        habits.remove(atOffsets: offsets)
     }
 }
 
