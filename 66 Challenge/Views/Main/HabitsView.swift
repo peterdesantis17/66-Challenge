@@ -18,16 +18,6 @@ struct HabitsView: View {
             }
             .navigationTitle("Habits")
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        Task {
-                            await authManager.signOut()
-                        }
-                    }) {
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
-                    }
-                }
-                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { showingAddHabit = true }) {
                         Image(systemName: "plus")

@@ -45,7 +45,6 @@ class HabitStore: ObservableObject {
         print("DEBUG: Checking for day change. Current time: \(today)")
         
         do {
-            // Get user's last login from Supabase
             let userId = try await supabase.auth.session.user.id
             let response: [LastLogin] = try await supabase
                 .from("last_logins")
@@ -58,10 +57,23 @@ class HabitStore: ObservableObject {
             let lastLogin = response.first?.lastSeen ?? today
             print("DEBUG: Last login time: \(lastLogin)")
             
-            // If it's a new day
+            // If it's a different day
             if Calendar.current.compare(today, to: lastLogin, toGranularity: .day) != .orderedSame {
-                print("DEBUG: 📅 New day detected! Saving stats and resetting habits...")
-                await saveDailyStats(forDate: lastLogin)
+                print("DEBUG: 📅 Days missed detected! Saving stats for each day...")
+                
+                // Save stats for the last active day with actual completion
+                await saveDailyStats(forDate: lastLogin, wasPresent: true)
+                
+                // Save 0% stats for all missed days in between
+                var currentDate = Calendar.current.date(byAdding: .day, value: 1, to: lastLogin) ?? today
+                while Calendar.current.startOfDay(for: currentDate) < today {
+                    print("DEBUG: 📊 Saving stats for missed day \(currentDate)")
+                    await saveDailyStats(forDate: currentDate, wasPresent: false)
+                    currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) ?? today
+                }
+                
+                // Reset habits only once after saving all stats
+                print("DEBUG: 🔄 Resetting habits for new day")
                 await resetHabits()
             } else {
                 print("DEBUG: 📅 Same day - no reset needed")
@@ -95,8 +107,8 @@ class HabitStore: ObservableObject {
         }
     }
     
-    private func saveDailyStats(forDate date: Date) async {
-        let completed = habits.filter { $0.isCompleted }.count
+    private func saveDailyStats(forDate date: Date, wasPresent: Bool = true) async {
+        let completed = wasPresent ? habits.filter { $0.isCompleted }.count : 0
         let total = habits.count
         let percentage = total > 0 ? (Double(completed) / Double(total)) * 100 : 0
         
