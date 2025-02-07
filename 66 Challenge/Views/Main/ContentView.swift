@@ -12,7 +12,7 @@ struct ContentView: View {
                     Label("Habits", systemImage: "checkmark.circle.fill")
                 }
             
-            ProgressView()
+            StatsView()
                 .environmentObject(habitStore)
                 .tabItem {
                     Label("Progress", systemImage: "chart.bar.fill")

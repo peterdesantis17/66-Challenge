@@ -5,6 +5,7 @@ import SwiftUI
 @MainActor
 class HabitStore: ObservableObject {
     @Published private(set) var habits: [Habit] = []
+    @Published private(set) var dailyStats: [DailyStats] = []
     private let supabase = SupabaseService.shared
     
     // Cache key
@@ -91,22 +92,6 @@ class HabitStore: ObservableObject {
         }
     }
     
-    private struct DailyStat: Encodable {
-        let userId: UUID
-        let date: Date
-        let completionPercentage: Double
-        let habitsCompleted: Int
-        let totalHabits: Int
-        
-        enum CodingKeys: String, CodingKey {
-            case userId = "user_id"
-            case date
-            case completionPercentage = "completion_percentage"
-            case habitsCompleted = "habits_completed"
-            case totalHabits = "total_habits"
-        }
-    }
-    
     private func saveDailyStats(forDate date: Date, wasPresent: Bool = true) async {
         let completed = wasPresent ? habits.filter { $0.isCompleted }.count : 0
         let total = habits.count
@@ -114,12 +99,14 @@ class HabitStore: ObservableObject {
         
         guard let userId = try? await supabase.auth.session.user.id else { return }
         
-        let stats = DailyStat(
+        let stats = DailyStats(
+            id: UUID(),  // New stat gets new UUID
             userId: userId,
             date: date,
             completionPercentage: percentage,
             habitsCompleted: completed,
-            totalHabits: total
+            totalHabits: total,
+            createdAt: Date()  // Current timestamp
         )
         
         do {
@@ -203,6 +190,20 @@ class HabitStore: ObservableObject {
             habits[index] = updated
             saveToCache()
         }
+    }
+    
+    func fetchDailyStats() async throws {
+        guard let userId = try? await supabase.auth.session.user.id else { return }
+        
+        let response = try await supabase
+            .from("daily_stats")
+            .select()
+            .eq("user_id", value: userId)
+            .order("date", ascending: false)
+            .limit(30)
+            .execute()
+        
+        dailyStats = try JSONDecoder().decode([DailyStats].self, from: response.data)
     }
 }
 

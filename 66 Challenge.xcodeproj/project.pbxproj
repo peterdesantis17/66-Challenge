@@ -27,6 +27,7 @@
 		D03473F72D5A792F00C5D7CD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03473F52D5A792F00C5D7CD /* SettingsView.swift */; };
 		D03473F82D5A792F00C5D7CD /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03473F62D5A792F00C5D7CD /* ProgressView.swift */; };
 		D03473FA2D5A792F00C5D7CD /* HabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03473F92D5A792F00C5D7CD /* HabitsView.swift */; };
+		D03473FE2D5A792F00C5D7CD /* DailyStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03473FD2D5A792F00C5D7CD /* DailyStats.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		D03473F52D5A792F00C5D7CD /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D03473F62D5A792F00C5D7CD /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		D03473F92D5A792F00C5D7CD /* HabitsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitsView.swift; sourceTree = "<group>"; };
+		D03473FD2D5A792F00C5D7CD /* DailyStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyStats.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		D02C8F212D559A5400ACC1A7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D03473FD2D5A792F00C5D7CD /* DailyStats.swift */,
 				D02C8F202D559A5400ACC1A7 /* Habit.swift */,
 			);
 			path = Models;
@@ -233,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D02C8F112D556F8800ACC1A7 /* SupabaseClient.swift in Sources */,
+				D03473FE2D5A792F00C5D7CD /* DailyStats.swift in Sources */,
 				D03473FA2D5A792F00C5D7CD /* HabitsView.swift in Sources */,
 				D02C8F2E2D5663F900ACC1A7 /* ContentView.swift in Sources */,
 				D02C8EF52D556B9600ACC1A7 /* _6_ChallengeApp.swift in Sources */,

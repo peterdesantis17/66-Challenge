@@ -13,7 +13,7 @@ class AuthManager: ObservableObject {
         // Check for existing session
         Task {
             do {
-                let session = try await client.auth.session
+                let _ = try await client.auth.session
                 isAuthenticated = true
                 print("Session restored")
             } catch {
