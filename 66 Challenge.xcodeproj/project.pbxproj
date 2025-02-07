@@ -26,6 +26,7 @@
 		D02C8F2E2D5663F900ACC1A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C8F292D5663F900ACC1A7 /* ContentView.swift */; };
 		D03473F72D5A792F00C5D7CD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03473F52D5A792F00C5D7CD /* SettingsView.swift */; };
 		D03473F82D5A792F00C5D7CD /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03473F62D5A792F00C5D7CD /* ProgressView.swift */; };
+		D03473FA2D5A792F00C5D7CD /* HabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03473F92D5A792F00C5D7CD /* HabitsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		D02C8F292D5663F900ACC1A7 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D03473F52D5A792F00C5D7CD /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D03473F62D5A792F00C5D7CD /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		D03473F92D5A792F00C5D7CD /* HabitsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,13 +125,30 @@
 		D02C8F2A2D5663F900ACC1A7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D03473FC2D5A792F00C5D7CD /* Auth */,
+				D03473FB2D5A792F00C5D7CD /* Main */,
 				D02C8F272D5663F900ACC1A7 /* Components */,
-				D03473F62D5A792F00C5D7CD /* ProgressView.swift */,
-				D03473F52D5A792F00C5D7CD /* SettingsView.swift */,
-				D02C8F282D5663F900ACC1A7 /* AuthView.swift */,
-				D02C8F292D5663F900ACC1A7 /* ContentView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D03473FB2D5A792F00C5D7CD /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D03473F62D5A792F00C5D7CD /* ProgressView.swift */,
+				D03473F52D5A792F00C5D7CD /* SettingsView.swift */,
+				D03473F92D5A792F00C5D7CD /* HabitsView.swift */,
+				D02C8F292D5663F900ACC1A7 /* ContentView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		D03473FC2D5A792F00C5D7CD /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				D02C8F282D5663F900ACC1A7 /* AuthView.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D02C8F112D556F8800ACC1A7 /* SupabaseClient.swift in Sources */,
+				D03473FA2D5A792F00C5D7CD /* HabitsView.swift in Sources */,
 				D02C8F2E2D5663F900ACC1A7 /* ContentView.swift in Sources */,
 				D02C8EF52D556B9600ACC1A7 /* _6_ChallengeApp.swift in Sources */,
 				D02C8F1F2D559A3400ACC1A7 /* HabitStore.swift in Sources */,
