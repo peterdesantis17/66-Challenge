@@ -14,8 +14,9 @@ class AuthManager: ObservableObject {
         Task {
             do {
                 let session = try await client.auth.session
-                isAuthenticated = session != nil
+                isAuthenticated = true  // If we get here, we have a valid session
             } catch {
+                isAuthenticated = false
                 print("No existing session")
             }
         }

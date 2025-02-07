@@ -8,7 +8,6 @@ class HabitStore: ObservableObject {
     
     // Cache key
     private let cacheKey = "cached_habits"
-    private let lastLoginKey = "last_login_date"
     
     init() {
         loadFromCache()
@@ -30,26 +29,64 @@ class HabitStore: ObservableObject {
         }
     }
     
+    private struct LastLoginUpdate: Encodable {
+        let userId: UUID
+        let lastSeen: Date
+        
+        enum CodingKeys: String, CodingKey {
+            case userId = "user_id"
+            case lastSeen = "last_seen"
+        }
+    }
+    
     private func checkForDayChange() async {
         let today = Calendar.current.startOfDay(for: Date())
         
-        // Get last login date from UserDefaults
-        let lastLogin = UserDefaults.standard.object(forKey: lastLoginKey) as? Date ?? today
-        
-        // If it's a new day
-        if Calendar.current.compare(today, to: lastLogin, toGranularity: .day) != .orderedSame {
-            // Save yesterday's stats
-            Task {
+        do {
+            // Get user's last login from Supabase
+            let userId = try await supabase.auth.session.user.id
+            let response: [LastLogin] = try await supabase
+                .from("last_logins")
+                .select()
+                .eq("user_id", value: userId)
+                .limit(1)
+                .execute()
+                .value
+            
+            let lastLogin = response.first?.lastSeen ?? today
+            
+            // If it's a new day
+            if Calendar.current.compare(today, to: lastLogin, toGranularity: .day) != .orderedSame {
                 await saveDailyStats(forDate: lastLogin)
-            }
-            // Reset habits
-            Task {
                 await resetHabits()
             }
+            
+            // Update last login in Supabase
+            let update = LastLoginUpdate(userId: userId, lastSeen: today)
+            try await supabase
+                .from("last_logins")
+                .upsert(update)
+                .execute()
+            
+        } catch {
+            print("Failed to check day change: \(error)")
         }
+    }
+    
+    private struct DailyStat: Encodable {
+        let userId: UUID
+        let date: Date
+        let completionPercentage: Double
+        let habitsCompleted: Int
+        let totalHabits: Int
         
-        // Update last login
-        UserDefaults.standard.set(today, forKey: lastLoginKey)
+        enum CodingKeys: String, CodingKey {
+            case userId = "user_id"
+            case date
+            case completionPercentage = "completion_percentage"
+            case habitsCompleted = "habits_completed"
+            case totalHabits = "total_habits"
+        }
     }
     
     private func saveDailyStats(forDate date: Date) async {
@@ -59,18 +96,22 @@ class HabitStore: ObservableObject {
         
         guard let userId = try? await supabase.auth.session.user.id else { return }
         
-        let stats: [String: Any] = [
-            "user_id": userId,
-            "date": date,
-            "completion_percentage": percentage,
-            "habits_completed": completed,
-            "total_habits": total
-        ]
+        let stats = DailyStat(
+            userId: userId,
+            date: date,
+            completionPercentage: percentage,
+            habitsCompleted: completed,
+            totalHabits: total
+        )
         
-        try? await supabase
-            .from("daily_stats")
-            .insert(stats)
-            .execute()
+        do {
+            try await supabase
+                .from("daily_stats")
+                .insert(stats)
+                .execute()
+        } catch {
+            print("Failed to save daily stats: \(error)")
+        }
     }
     
     private func resetHabits() async {
@@ -81,12 +122,16 @@ class HabitStore: ObservableObject {
         saveToCache()
         
         // Reset habits in Supabase
-        guard let userId = try? await supabase.auth.session.user.id else { return }
-        try? await supabase
-            .from("habits")
-            .update(["is_completed": false])
-            .eq("user_id", value: userId)
-            .execute()
+        do {
+            guard let userId = try? await supabase.auth.session.user.id else { return }
+            try await supabase
+                .from("habits")
+                .update(["is_completed": false])
+                .eq("user_id", value: userId)
+                .execute()
+        } catch {
+            print("Failed to reset habits in Supabase: \(error)")
+        }
     }
     
     func fetchHabits() async throws {
@@ -140,5 +185,16 @@ class HabitStore: ObservableObject {
             habits[index] = updated
             saveToCache()
         }
+    }
+}
+
+// Model for last login
+private struct LastLogin: Decodable {
+    let userId: UUID
+    let lastSeen: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case userId = "user_id"
+        case lastSeen = "last_seen"
     }
 } 
