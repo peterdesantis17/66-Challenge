@@ -47,18 +47,18 @@ struct CalendarView: UIViewRepresentable {
                 let percentage = stat.completionPercentage
                 
                 switch percentage {
-                case 0:
-                    return .systemGray.withAlphaComponent(0.3)
-                case 1...20:
-                    return .systemGreen.withAlphaComponent(0.2)
-                case 21...40:
-                    return .systemGreen.withAlphaComponent(0.4)
-                case 41...60:
-                    return .systemGreen.withAlphaComponent(0.6)
-                case 61...80:
+                case 0...25:
+                    return .systemGreen.withAlphaComponent(0.15)
+                case 25..<50:
+                    return .systemGreen.withAlphaComponent(0.3)
+                case 50..<80:
+                    return .systemGreen.withAlphaComponent(0.5)
+                case 80..<95:
                     return .systemGreen.withAlphaComponent(0.8)
-                default:
+                case 95...100:
                     return .systemGreen
+                default:
+                    return nil
                 }
             }
             return nil
