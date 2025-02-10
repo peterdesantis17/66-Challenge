@@ -42,6 +42,7 @@ class HabitStore: ObservableObject {
     
     func checkForDayChange() async {
         let today = Calendar.current.startOfDay(for: Date())
+        print("DEBUG: Checking for day change. Current time: \(today)")
         
         do {
             // Get user's last login from Supabase
@@ -55,11 +56,15 @@ class HabitStore: ObservableObject {
                 .value
             
             let lastLogin = response.first?.lastSeen ?? today
+            print("DEBUG: Last login time: \(lastLogin)")
             
             // If it's a new day
             if Calendar.current.compare(today, to: lastLogin, toGranularity: .day) != .orderedSame {
+                print("DEBUG: 📅 New day detected! Saving stats and resetting habits...")
                 await saveDailyStats(forDate: lastLogin)
                 await resetHabits()
+            } else {
+                print("DEBUG: 📅 Same day - no reset needed")
             }
             
             // Update last login in Supabase
@@ -70,7 +75,7 @@ class HabitStore: ObservableObject {
                 .execute()
             
         } catch {
-            print("Failed to check day change: \(error)")
+            print("DEBUG: ❌ Failed to check day change: \(error)")
         }
     }
     
