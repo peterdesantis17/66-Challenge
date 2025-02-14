@@ -15,6 +15,11 @@ struct HabitsView: View {
                         try await habitStore.toggleHabit(habit)
                     }
                 }
+                .onMove { from, to in
+                    Task {
+                        try? await habitStore.reorderHabits(from: from, to: to)
+                    }
+                }
             }
             .navigationTitle("Habits")
             .toolbar {
@@ -22,6 +27,9 @@ struct HabitsView: View {
                     Button(action: { showingAddHabit = true }) {
                         Image(systemName: "plus")
                     }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
                 }
             }
             .sheet(isPresented: $showingAddHabit) {

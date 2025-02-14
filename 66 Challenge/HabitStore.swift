@@ -143,6 +143,7 @@ class HabitStore: ObservableObject {
         let response: [Habit] = try await supabase
             .from("habits")
             .select()
+            .order("order")
             .execute()
             .value
         
@@ -154,12 +155,16 @@ class HabitStore: ObservableObject {
         let session = try await supabase.auth.session
         let userId = session.user.id
         
+        // Fix the next order calculation
+        let nextOrder = (habits.map { $0.order }.max() ?? 0) + 1  // Add parentheses
+        
         let newHabit = Habit(
             id: UUID(),
             userId: userId,
             title: title,
             isCompleted: false,
-            createdAt: Date()
+            createdAt: Date(),
+            order: nextOrder
         )
         
         try await supabase
@@ -177,7 +182,8 @@ class HabitStore: ObservableObject {
             userId: habit.userId,
             title: habit.title,
             isCompleted: !habit.isCompleted,
-            createdAt: habit.createdAt
+            createdAt: habit.createdAt,
+            order: habit.order
         )
         
         try await supabase
@@ -204,6 +210,36 @@ class HabitStore: ObservableObject {
             .execute()
         
         dailyStats = try JSONDecoder().decode([DailyStats].self, from: response.data)
+    }
+    
+    func reorderHabits(from source: IndexSet, to destination: Int) async throws {
+        // Update local order
+        habits.move(fromOffsets: source, toOffset: destination)
+        
+        // Update order numbers for all habits
+        for (index, var habit) in habits.enumerated() {
+            if habit.order != index + 1 {
+                // Only update if order changed
+                habit = Habit(
+                    id: habit.id,
+                    userId: habit.userId,
+                    title: habit.title,
+                    isCompleted: habit.isCompleted,
+                    createdAt: habit.createdAt,
+                    order: index + 1
+                )
+                
+                try await supabase
+                    .from("habits")
+                    .update(["order": index + 1])
+                    .eq("id", value: habit.id)
+                    .execute()
+                
+                habits[index] = habit
+            }
+        }
+        
+        saveToCache()
     }
 }
 

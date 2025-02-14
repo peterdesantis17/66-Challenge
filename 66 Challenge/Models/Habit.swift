@@ -6,6 +6,7 @@ struct Habit: Identifiable, Codable {
     let title: String
     var isCompleted: Bool
     let createdAt: Date
+    let order: Int
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -13,5 +14,6 @@ struct Habit: Identifiable, Codable {
         case title
         case isCompleted = "is_completed"
         case createdAt = "created_at"
+        case order
     }
 } 
